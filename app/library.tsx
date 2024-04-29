@@ -40,8 +40,10 @@ function Library() {
     keepPreviousData: true,
   })
 
+  const libraryPageExists = gData && gData.length > 0 && gData[gData.length - 1]?.TotalCount
   const hasMoreGalleries =
-    gData && gData[gData.length - 1].TotalCount > gData.reduce((acc, galleryResult) => acc + galleryResult.Count, 0)
+    libraryPageExists &&
+    gData[gData.length - 1].TotalCount > gData.reduce((acc, galleryResult) => acc + galleryResult.Count, 0)
 
   // TODO: Grid masonry when major browsers support it (https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Masonry_Layout)
   return (
