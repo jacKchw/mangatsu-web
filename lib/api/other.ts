@@ -1,4 +1,5 @@
 import { ServerInfo } from "../../types/api"
+import { LocalPreferences, setValue } from "../localStorage"
 
 export enum APIPathsV1 {
   Register = "register",
@@ -99,6 +100,13 @@ export function fetchResponse(path: string, cookie?: string, constructURL = true
 export async function fetchJSON<T = unknown>(path: string, cookie?: string, constructURL = true): Promise<T | null> {
   const response = await fetchResponse(path, cookie, constructURL)
   if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      setValue(LocalPreferences.Expires, undefined)
+      setValue(LocalPreferences.Roles, undefined)
+      setValue(LocalPreferences.UserUUID, undefined)
+      window.location.assign("/login")
+    }
+
     return null
   }
 
