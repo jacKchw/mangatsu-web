@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Visibility } from "../../../types/api"
-import { Role } from "../../helpers"
+import { Role, isInteger } from "../../helpers"
 import { LocalPreferences, getValue } from "../../localStorage"
 
 export interface UserPreferences {
@@ -35,10 +35,14 @@ export default function useUser() {
     }
 
     const uuidLocal = getValue(LocalPreferences.UserUUID)
-    setUUID(uuidLocal)
+    if (uuidLocal && uuidLocal.length === 36) {
+      setUUID(uuidLocal)
+    }
 
     const roleLocal = getValue(LocalPreferences.Roles)
-    setRole(roleLocal)
+    if (isInteger(roleLocal) && roleLocal >= Role.NoRole && roleLocal <= Role.Admin) {
+      setRole(roleLocal)
+    }
 
     let expiredLocal: boolean
     const expires = getValue(LocalPreferences.Expires)
@@ -50,10 +54,13 @@ export default function useUser() {
       setExpired(expiredLocal)
     }
 
+    const nsfwPref = getValue(LocalPreferences.NSFWPref)
+    const languagePref = getValue(LocalPreferences.LanguagePref)
+    const seriesRandomPref = getValue(LocalPreferences.SeriesRandomPref)
     setPreferences({
-      NSFW: getValue(LocalPreferences.NSFWPref),
-      Language: getValue(LocalPreferences.LanguagePref),
-      SeriesRandom: getValue(LocalPreferences.SeriesRandomPref),
+      NSFW: nsfwPref === true || nsfwPref === "true",
+      Language: languagePref === true || languagePref === "true",
+      SeriesRandom: seriesRandomPref === true || seriesRandomPref === "true",
     })
 
     if (!loading) {

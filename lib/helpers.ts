@@ -8,6 +8,13 @@ export function changeExtension(file: string, extension: string) {
   return path.join(path.dirname(file), `${basename}${extension}`)
 }
 
+/**
+ * Clamps the given value between the min and max values.
+ * @param value
+ * @param min
+ * @param max
+ * @returns clamped value
+ */
 export function clamp(value: number, min: number, max: number): number {
   if (value < min) {
     return min
@@ -16,6 +23,19 @@ export function clamp(value: number, min: number, max: number): number {
     return max
   }
   return value
+}
+
+/**
+ * Checks if the given value is an integer.  Short-circuiting, and saving a parse operation
+ * @param value
+ * @returns true if the value is an integer, false otherwise
+ */
+export function isInteger(value: unknown) {
+  if (isNaN(value as number)) {
+    return false
+  }
+  const x = parseFloat(value as string)
+  return (x | 0) === x
 }
 
 /**
