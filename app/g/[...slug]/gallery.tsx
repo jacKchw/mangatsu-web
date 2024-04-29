@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 import ComicViewer from "react-comic-viewer"
 import { GroupBase, OptionsOrGroups, StylesConfig } from "react-select"
 import CreatableSelect from "react-select/creatable"
-import useSWR, { Fetcher } from "swr"
+import useSWR from "swr"
 import Button from "../../../components/Button"
 import EditGallery from "../../../components/EditGallery"
 import withAuth from "../../../components/HOC/WithAuth"
@@ -19,7 +19,7 @@ import { APIPathsV1, getCacheUrl, swrFetcher } from "../../../lib/api/other"
 import { updateFavoriteGroup } from "../../../lib/api/user"
 import { Role, changeExtension } from "../../../lib/helpers"
 import useUser from "../../../lib/hooks/data/useUser"
-import { Gallery } from "../../../types/api"
+import { Gallery, GenericDataResponse } from "../../../types/api"
 import NotFound from "../../not-found"
 
 // Style for the react-select component (favorite selection)
@@ -47,7 +47,7 @@ const customStyles: StylesConfig = {
 
 const DEFAULT_GROUP = "Select or create a group"
 
-const fetcher: Fetcher<Gallery, string> = (id) => swrFetcher(id)
+const fetcher = (id: string) => swrFetcher<Gallery>(id)
 
 function GalleryPage() {
   const params = useParams()
@@ -79,7 +79,7 @@ function GalleryPage() {
 
   const { data: favoritesData, mutate: mutateFavorites } = useSWR(
     access && isUser ? APIPathsV1.Favorites : null,
-    (key) => swrFetcher(key),
+    (key) => swrFetcher<GenericDataResponse<string[]>>(key),
   )
 
   let favoriteGroups: OptionsOrGroups<unknown, GroupBase<unknown>> = []

@@ -10,6 +10,15 @@ export enum Visibility {
   Private = "private",
 }
 
+export interface GenericMessage {
+  Message: string
+}
+
+export interface GenericDataResponse<T = unknown> {
+  Data: T
+  Count: number
+}
+
 export interface ServerInfo {
   APIVersion?: number
   ServerVersion?: string
@@ -17,10 +26,9 @@ export interface ServerInfo {
   Registrations?: boolean
 }
 
-// Galleries
-export interface GalleryResponse {
-  Data: GalleryMeta[]
-  Count: number
+// Library, Galleries
+export interface GalleriesOrGrouped extends GenericDataResponse<GalleryMeta[] | OrderedMap<GalleryMeta>> {
+  TotalCount: number
 }
 
 export interface Gallery {
@@ -28,8 +36,6 @@ export interface Gallery {
   Files: string[]
   Count: number
 }
-
-export type GroupedGalleries = Map<string, GalleryMeta[]>
 
 export interface GalleryMeta {
   UUID: string
@@ -86,6 +92,10 @@ export interface MangatsuSession {
   UserUUID: string
   Name: string | null
   ExpiresAt: string | null
+}
+
+export interface MangatsuSessionResponse extends GenericDataResponse<MangatsuSession[]> {
+  CurrentSession: string
 }
 
 export interface MangatsuUser {

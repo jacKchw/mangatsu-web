@@ -1,12 +1,12 @@
 import { toast } from "react-toastify"
 import { KeyedMutator } from "swr"
-import { MangatsuSessionResponse, deleteSession, initiateLogout } from "../lib/api/user"
-import { MangatsuSession } from "../types/api"
+import { deleteSession, initiateLogout } from "../lib/api/user"
+import { MangatsuSession, MangatsuSessionResponse } from "../types/api"
 
 interface Props {
   sessions: MangatsuSession[]
   currentSessionID: string
-  mutate: KeyedMutator<MangatsuSessionResponse>
+  mutate: KeyedMutator<MangatsuSessionResponse | null>
 }
 
 const Sessions = ({ sessions, currentSessionID, mutate }: Props) => {

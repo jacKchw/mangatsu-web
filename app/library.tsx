@@ -3,7 +3,7 @@ import { useState } from "react"
 import useSWRInfinite from "swr/infinite"
 import Filters from "../components/Filters"
 import { LibraryLayout } from "../components/Filters/LayoutSelect"
-import GalleryGrid, { GalleriesResult } from "../components/GalleryGrid"
+import GalleryGrid from "../components/GalleryGrid"
 import withAuth from "../components/HOC/WithAuth"
 import { fetchLibrary } from "../lib/api/library"
 import { Role } from "../lib/helpers"
@@ -11,7 +11,7 @@ import useCategories from "../lib/hooks/data/useCategories"
 import useFavorites from "../lib/hooks/data/useFavorites"
 import useDebounce from "../lib/hooks/useDebounce"
 import { LocalPreferences, getValue } from "../lib/localStorage"
-import { LibraryFilters } from "../types/api"
+import { GalleriesOrGrouped, LibraryFilters } from "../types/api"
 
 type FetcherKey = [number, LibraryFilters] // offset, query
 const gFetcher = (key: FetcherKey) => fetchLibrary(...key)

@@ -4,15 +4,17 @@ import NewUserForm from "../../components/Forms/NewUserForm"
 import withAuth from "../../components/HOC/WithAuth"
 import Users from "../../components/Users"
 import { APIPathsV1, swrFetcher } from "../../lib/api/other"
-import { MangatsuUserResponse } from "../../lib/api/user"
 import { Role } from "../../lib/helpers"
 import useUser from "../../lib/hooks/data/useUser"
+import { GenericDataResponse, MangatsuUser } from "../../types/api"
 
 function Admin() {
   const { uuid } = useUser()
-  const { data, mutate } = useSWR(APIPathsV1.Users, (key: string) => swrFetcher(key))
+  const { data, mutate } = useSWR(APIPathsV1.Users, (key: string) =>
+    swrFetcher<GenericDataResponse<MangatsuUser[]>>(key),
+  )
 
-  const users = data?.Data ? (data as MangatsuUserResponse) : null
+  const users = data?.Data ? data : null
 
   return (
     <div className="flex flex-col justify-center ">

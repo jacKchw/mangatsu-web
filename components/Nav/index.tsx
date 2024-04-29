@@ -17,7 +17,7 @@ const Nav = () => {
   const { access, isAdmin, preferences } = useUser()
 
   const handleRandom = async () => {
-    const gallery: Gallery = await fetchJSON(
+    const gallery = await fetchJSON<Gallery>(
       `${APIPathsV1.RandomGallery}${preferences.SeriesRandom ? "" : "?series=false"}`,
     )
     if (gallery) {

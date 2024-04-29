@@ -1,21 +1,9 @@
-import { MangatsuSession, MangatsuUser } from "../../types/api"
 import { APIPathsV1, getApiUrl } from "./other"
 
 export interface UserForm {
   username?: string
   password?: string
   role?: number
-}
-
-export interface MangatsuUserResponse {
-  Data: MangatsuUser[]
-  Count: number
-}
-
-export interface MangatsuSessionResponse {
-  Data: MangatsuSession[]
-  CurrentSession: string
-  Count: number
 }
 
 /**

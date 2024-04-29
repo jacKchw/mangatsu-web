@@ -1,5 +1,5 @@
-import { LibraryFilters } from "../../types/api"
-import { APIPathsV1, fetchJSON, fetchResponse, getApiUrl, RESULT_LIMIT } from "./other"
+import { GalleriesOrGrouped, LibraryFilters } from "../../types/api"
+import { APIPathsV1, RESULT_LIMIT, fetchJSON, fetchResponse, getApiUrl } from "./other"
 
 export interface GalleryForm {
   title?: string
@@ -42,7 +42,7 @@ export async function fetchLibrary(offset: number, filters?: LibraryFilters) {
   requestUrl.searchParams.append("limit", RESULT_LIMIT.toString())
   requestUrl.searchParams.append("offset", offset.toString())
 
-  return fetchJSON(requestUrl.toString(), undefined, false)
+  return fetchJSON<GalleriesOrGrouped>(requestUrl.toString(), undefined, false)
 }
 
 /**
@@ -61,19 +61,6 @@ export async function fetchLibraryCount(filters?: LibraryFilters) {
 
   const data = await response.json()
   return data.Count
-}
-
-/**
- * Returns galleries in the specified series.
- *
- * @param series
- * @returns promise of the response
- */
-export async function fetchSeries(series: string, cookie?: string) {
-  const requestUrl = new URL(getApiUrl(APIPathsV1.Galleries))
-  requestUrl.searchParams.append("series", series)
-
-  return fetchJSON(requestUrl.toString(), cookie, false)
 }
 
 /**

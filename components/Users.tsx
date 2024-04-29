@@ -1,16 +1,17 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { KeyedMutator } from "swr"
-import { MangatsuUserResponse, deleteUser } from "../lib/api/user"
+import { deleteUser } from "../lib/api/user"
 import { Role, getRole } from "../lib/helpers"
+import { GenericDataResponse, MangatsuUser } from "../types/api"
 import UpdateUserForm from "./Forms/UpdateUserForm"
 import OnOffSwitch from "./OnOffSwitch"
 import PopupLarge from "./PopupLarge"
 
 interface Props {
-  users: MangatsuUserResponse
+  users: GenericDataResponse<MangatsuUser[]>
   userUUID: string | null
-  mutate: KeyedMutator<unknown>
+  mutate: KeyedMutator<GenericDataResponse<MangatsuUser[]> | null>
 }
 
 const Users = ({ users, userUUID, mutate }: Props) => {

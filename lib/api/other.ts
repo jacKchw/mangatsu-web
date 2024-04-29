@@ -96,7 +96,7 @@ export function fetchResponse(path: string, cookie?: string, constructURL = true
  * @param cookie JWT
  * @returns promise of the JSON or null
  */
-export async function fetchJSON(path: string, cookie?: string, constructURL = true) {
+export async function fetchJSON<T = unknown>(path: string, cookie?: string, constructURL = true): Promise<T | null> {
   const response = await fetchResponse(path, cookie, constructURL)
   if (!response.ok) {
     return null
@@ -112,7 +112,7 @@ export async function fetchJSON(path: string, cookie?: string, constructURL = tr
  * @param cookie JWT
  * @returns promise of the JSON or null
  */
-export async function swrFetcher(path: string, cookie?: string) {
+export async function swrFetcher<T = unknown>(path: string, cookie?: string): Promise<T | null> {
   const response = await fetchResponse(path, cookie)
   return await response.json()
 }

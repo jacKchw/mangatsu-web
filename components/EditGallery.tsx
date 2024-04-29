@@ -7,7 +7,7 @@ import PopupLarge from "./PopupLarge"
 
 interface EditGalleryProps {
   gallery: GalleryMeta
-  mutate: KeyedMutator<Gallery>
+  mutate: KeyedMutator<Gallery | null>
 }
 
 interface Form {

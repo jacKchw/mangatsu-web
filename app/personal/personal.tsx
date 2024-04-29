@@ -7,17 +7,18 @@ import InputError from "../../components/InputError"
 import OnOffSwitch from "../../components/OnOffSwitch"
 import Sessions from "../../components/Sessions"
 import { APIPathsV1, swrFetcher } from "../../lib/api/other"
-import { MangatsuSessionResponse, updateUser } from "../../lib/api/user"
+import { updateUser } from "../../lib/api/user"
 import { Role } from "../../lib/helpers"
 import useUser from "../../lib/hooks/data/useUser"
 import { LocalPreferences, setValue } from "../../lib/localStorage"
 import { newPasswordFormResolver } from "../../lib/validations/resolvers"
+import { MangatsuSessionResponse } from "../../types/api"
 
 function Personal() {
   const { uuid, preferences, setPreferences } = useUser()
 
-  const { data: response, mutate } = useSWR<MangatsuSessionResponse>(APIPathsV1.Sessions, (key: string) =>
-    swrFetcher(key),
+  const { data: response, mutate } = useSWR(APIPathsV1.Sessions, (key: string) =>
+    swrFetcher<MangatsuSessionResponse>(key),
   )
 
   const {

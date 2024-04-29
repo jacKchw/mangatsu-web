@@ -4,10 +4,11 @@ import { KeyedMutator } from "swr"
 import { newUser } from "../../lib/api/user"
 import { Role } from "../../lib/helpers"
 import { newUserFormResolver } from "../../lib/validations/resolvers"
+import { GenericDataResponse, MangatsuUser } from "../../types/api"
 import InputError from "../InputError"
 
 interface Props {
-  mutate: KeyedMutator<unknown>
+  mutate: KeyedMutator<GenericDataResponse<MangatsuUser[]> | null>
 }
 
 const NewUserForm = ({ mutate }: Props) => {

@@ -3,17 +3,11 @@ import Link from "next/link"
 import { getCacheUrl } from "../lib/api/other"
 import { Base64Placeholder } from "../lib/helpers"
 import placeholderCover from "../public/placeholder-fade.png"
-import { GalleryMeta, OrderedMap } from "../types/api"
+import { GalleriesOrGrouped, GalleryMeta } from "../types/api"
 import { LibraryLayout } from "./Filters/LayoutSelect"
 
-export interface GalleriesResult {
-  Data: GalleryMeta[] | OrderedMap<GalleryMeta>
-  Count: number
-  TotalCount: number
-}
-
 interface GalleryProps {
-  galleries: GalleriesResult[]
+  galleries: GalleriesOrGrouped[]
   layout: LibraryLayout
   nativeTitles: boolean
 }
