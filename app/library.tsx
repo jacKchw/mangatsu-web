@@ -36,14 +36,16 @@ function Library() {
     data: gData,
     size: gSize,
     setSize: setGSize,
-  } = useSWRInfinite<GalleriesResult>(getGKey, gFetcher, {
+  } = useSWRInfinite(getGKey, gFetcher, {
     keepPreviousData: true,
   })
 
-  const libraryPageExists = gData && gData.length > 0 && gData[gData.length - 1]?.TotalCount
+  const libraryPageExists = gData && gData.length > 0
+  const validated = (libraryPageExists ? gData.filter((result) => result !== null) : []) as GalleriesOrGrouped[]
+
   const hasMoreGalleries =
-    libraryPageExists &&
-    gData[gData.length - 1].TotalCount > gData.reduce((acc, galleryResult) => acc + galleryResult.Count, 0)
+    validated.length > 0 &&
+    validated[validated.length - 1].TotalCount > validated.reduce((acc, result) => acc + result.Count, 0)
 
   // TODO: Grid masonry when major browsers support it (https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Masonry_Layout)
   return (
@@ -57,8 +59,8 @@ function Library() {
         favorites={favorites}
         setLayout={setLayout}
       />
-      {gData && gData.length > 0 && gData[0].Count > 0 ? (
-        <GalleryGrid galleries={gData} layout={layout} nativeTitles={nativeTitles} />
+      {validated && validated.length > 0 && validated[0] && validated[0].Count > 0 ? (
+        <GalleryGrid galleries={validated} layout={layout} nativeTitles={nativeTitles} />
       ) : (
         <div className="flex items-center justify-center text-2xl text-slate-200">No galleries found</div>
       )}
