@@ -4,6 +4,18 @@ All notable changes of this project will be documented in this file. Unreleased 
 
 > The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.7] - 2024-04-30
+
+### Changed
+
+- Clear login data when receiving 401 or 403 from the server
+- Better API typing
+- Better validation for settings in local storage
+
+### Fixed
+
+- A rare null error when login fails
+
 ## [0.6.6] - 2024-03-23
 
 **Server v0.8.0 required!**
