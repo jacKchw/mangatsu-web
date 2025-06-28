@@ -3,7 +3,7 @@ import { FilterProps } from "."
 import OnOffSwitch from "../OnOffSwitch"
 
 const ShuffleSwitch = ({ query, setQuery }: FilterProps) => {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(true)
 
   const handleChange = (checked: boolean) => {
     setChecked(checked)

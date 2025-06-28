@@ -17,11 +17,15 @@ type FetcherKey = [number, LibraryFilters] // offset, query
 const gFetcher = (key: FetcherKey) => fetchLibrary(...key)
 
 function Library() {
-  const [query, setQuery] = useState<LibraryFilters>({ nsfwHidden: getValue(LocalPreferences.NSFWPref) })
+  const [query, setQuery] = useState<LibraryFilters>({
+    nsfwHidden: getValue(LocalPreferences.NSFWPref),
+    seed: Math.floor(Math.random() * 2147483648),
+  })
+
   const [grouped, setGrouped] = useState(false)
   const debouncedFilters = useDebounce(query, 100)
 
-  const [layout, setLayout] = useState(LibraryLayout.Thumbnail)
+  const [layout, setLayout] = useState(LibraryLayout.Detailed)
   const nativeTitles = getValue(LocalPreferences.LanguagePref)
 
   const { categories } = useCategories()
