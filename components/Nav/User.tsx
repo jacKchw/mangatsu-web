@@ -20,7 +20,7 @@ const User = ({ isAdmin }: Props) => {
   const { server, isLoading, error } = useServer()
   const { isUser, isAnonymous } = useUser()
 
-  const menuRef = useRef<PopupActions>() as RefObject<PopupActions>
+  const menuRef = useRef<PopupActions>(undefined) as RefObject<PopupActions | null>
   const closeUserMenu = () => {
     if (menuRef.current) {
       menuRef.current.close()
@@ -62,13 +62,13 @@ const User = ({ isAdmin }: Props) => {
           ) : (
             <>
               <p>
-                Visibility: <span className="font-bold">{isLoading ? "..." : server?.Visibility ?? "-"}</span>
+                Visibility: <span className="font-bold">{isLoading ? "..." : (server?.Visibility ?? "-")}</span>
               </p>
               <p>
-                Server: <span className="font-bold">{isLoading ? "..." : server?.ServerVersion ?? "-"}</span>
+                Server: <span className="font-bold">{isLoading ? "..." : (server?.ServerVersion ?? "-")}</span>
               </p>
               <p>
-                API: <span className="font-bold">V{isLoading ? "..." : server?.APIVersion ?? "-"}</span>
+                API: <span className="font-bold">V{isLoading ? "..." : (server?.APIVersion ?? "-")}</span>
               </p>
             </>
           )}

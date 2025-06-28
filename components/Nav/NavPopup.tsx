@@ -5,7 +5,7 @@ import { PopupActions } from "reactjs-popup/dist/types"
 interface Props {
   triggerChildren: ReactNode
   children: ReactNode
-  menuRef?: RefObject<PopupActions>
+  menuRef?: RefObject<PopupActions | null>
   isLink?: boolean
   isVisible?: boolean
   onVisibilityChange?: (isOpen: boolean) => void
