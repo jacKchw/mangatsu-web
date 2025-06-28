@@ -37,16 +37,13 @@ const GalleryGrid = ({ galleries, layout, nativeTitles }: GalleryProps) => {
                 </div>
               )}
               <Link
+                prefetch={false}
                 href={`g/${gallery.UUID}`}
                 className="grid place-content-center bg-gray-800 bg-clip-padding rounded"
               >
-                <Image
+                <img
                   alt="cover image"
-                  src={
-                    gallery.Thumbnail
-                      ? getCacheUrl(`/thumbnails/${gallery.UUID}/${gallery.Thumbnail}`)
-                      : placeholderCover
-                  }
+                  src={getCacheUrl(`/thumbnails/${gallery.UUID}/${gallery.Thumbnail}`)}
                   className="w-full text-center rounded"
                   width={200}
                   height={300}
