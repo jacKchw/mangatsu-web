@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Switch from "react-switch"
 import { FilterProps } from "."
+import SwithcContainer from "./SwitchContainer"
 
 const OrderSwitch = ({ query, setQuery }: FilterProps) => {
   const [checked, setChecked] = useState(false)
@@ -10,7 +11,7 @@ const OrderSwitch = ({ query, setQuery }: FilterProps) => {
   }
 
   return (
-    <span>
+    <SwithcContainer>
       <label className="text-sm font-medium text-gray-400 px-2">Order</label>
       <Switch
         checked={checked}
@@ -25,7 +26,7 @@ const OrderSwitch = ({ query, setQuery }: FilterProps) => {
         uncheckedHandleIcon={<div className="flex justify-center align-middle h-full text-blue-600">⬆</div>}
         checkedHandleIcon={<div className="flex justify-center align-middle h-full text-blue-600">⬇</div>}
       />
-    </span>
+    </SwithcContainer>
   )
 }
 

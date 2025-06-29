@@ -25,11 +25,11 @@ interface Props extends FilterProps {
 
 const Filters = ({ query, setQuery, grouped, setGrouped, categories, favorites, setLayout }: Props) => {
   return (
-    <div className="flex flex-row mb-12 lg:mx-4">
+    <div className="flex flex-row mb-12 lg:mx-4 max:w-full">
       <div className="w-full grid grid-flow-row">
         <SearchBox query={query} setQuery={setQuery} />
         <div className="filter-grid mt-2">
-          <div className="flex justify-center ">
+          <div className="flex flex-wrap justify-evenly gap-x-1">
             <NSFWSwitch query={query} setQuery={setQuery} />
             <OrderSwitch query={query} setQuery={setQuery} />
             <GroupSeriesSwitch query={query} setQuery={setQuery} grouped={grouped} setGrouped={setGrouped} />

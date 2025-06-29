@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { FilterProps } from "."
 import { getValue, LocalPreferences } from "../../lib/localStorage"
 import OnOffSwitch from "../OnOffSwitch"
+import SwithcContainer from "./SwitchContainer"
 
 const NSFWSwitch = ({ query, setQuery }: FilterProps) => {
   const [checked, setChecked] = useState(true)
@@ -16,10 +17,10 @@ const NSFWSwitch = ({ query, setQuery }: FilterProps) => {
   }
 
   return (
-    <span>
+    <SwithcContainer>
       <label className="text-sm font-medium text-gray-400 px-2">NSFW</label>
       <OnOffSwitch checked={checked} onChange={handleChange} />
-    </span>
+    </SwithcContainer>
   )
 }
 
